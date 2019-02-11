@@ -5,7 +5,9 @@
                 <template v-for="(item, index) in items">
                     <v-list-tile :key="index">
                         <v-list-tile-content>
-                            {{item.title}}
+                            <router-link :to="item.route">
+                                {{item.title}}
+                            </router-link>
                         </v-list-tile-content>
                     </v-list-tile>
                     <v-divider :key="`divider-${index}`"></v-divider>
@@ -15,11 +17,13 @@
         <v-toolbar app color="brown darken-4" dark>
             <v-toolbar-side-icon class="hidden-md-and-up" @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-spacer class="hidden-md-and-up"></v-spacer>
-            <v-toolbar-title>{{appTitle}}</v-toolbar-title>
-            <v-btn flat class="hidden-sm-and-down">Menu</v-btn>
+            <router-link to="/">
+                <v-toolbar-title to="/">{{appTitle}}</v-toolbar-title>
+            </router-link>
+            <v-btn flat class="hidden-sm-and-down" to="/menu">Menu</v-btn>
             <v-spacer class="hidden-sm-and-down"></v-spacer>
-            <v-btn flat class="hidden-sm-and-down">SING IN</v-btn>
-            <v-btn color="brown lighten-3" class="hidden-sm-and-down">JOIN</v-btn>
+            <v-btn flat class="hidden-sm-and-down" to="/sing-in">SING IN</v-btn>
+            <v-btn color="brown lighten-3" class="hidden-sm-and-down" to="/join">JOIN</v-btn>
         </v-toolbar>
     </span>
 </template>
@@ -32,9 +36,9 @@ export default {
             appTitle: 'Meal Prep',
             drawer: false,
             items: [
-                { title: 'Menu' },
-                { title: 'Sign In' },
-                { title: 'Join' }
+                { title: 'Menu', route: '/menu' },
+                { title: 'Sign In', route: '/sign-in' },
+                { title: 'Join', route: '/join' }
             ]
         };
     }
@@ -42,4 +46,8 @@ export default {
 </script>
 
 <style scoped>
+a {
+    color: white;
+    text-decoration: none;
+}
 </style>
